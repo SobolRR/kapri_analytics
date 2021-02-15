@@ -18,33 +18,35 @@ const folderLinks = {
 export const fetchStock = async (options) => {
   const { folderName, inTransit } = options;
   const stockMode = inTransit ? "all" : "positiveOnly";
-  
-    const result = await axios.get(
-      `/api/remap/1.2/report/stock/all?groupBy=consignment&filter=stockMode=${stockMode}&filter=productFolder=${folderLinks[folderName]}&filter=inTransitOnly=${inTransit}`,
+  const link = `https://online.moysklad.ru/api/remap/1.2/report/stock/all?groupBy=consignment&filter=stockMode=${stockMode}&filter=productFolder=${folderLinks[folderName]}&filter=inTransitOnly=${inTransit}`
+
+    const result = await axios.post(
+      'https://kapri-server.herokuapp.com',{link},
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: tokAuth,
         },
       }
     );
-    return result.data.rows
+    return result.data
 }
 
 export const fetchSales = async (
-  momentFrom = "2021-01-01 00:00:00",
+  momentFrom = "2020-11-01 00:00:00",
   momentTo = moment(new Date()).format(dateFormat)
+ 
 ) => {
-  const result = await axios.get(
-    `/api/remap/1.2/report/profit/byvariant?momentFrom=${momentFrom}&momentTo=${momentTo}`,
+  const link = `https://online.moysklad.ru/api/remap/1.2/report/profit/byvariant?momentFrom=${momentFrom}&momentTo=${momentTo}`
+  const result = await axios.post(
+    'https://kapri-server.herokuapp.com',{link},
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: tokAuth,
+        
       },
     }
   );
-  return result.data.rows;
+  return result.data
 };
 
 // https://online.moysklad.ru/api/remap/1.2/entity/product/0348ebe1-4064-11eb-0a80-016c003284d1

@@ -1,7 +1,7 @@
 import { Table } from 'antd'
 import React,{useEffect,  useState} from 'react'
 import { fetchSales } from '../../core/api'
-import {goods,productNamesToFolders,dateFormat} from '../../data'
+import {productNamesToFolders,dateFormat} from '../../data'
 import { createDefaultDataSource,columns,getSize } from '../../utils/utils'
 import { DatePicker, Space } from 'antd';
 import moment from 'moment';
@@ -25,7 +25,7 @@ export const SalesTable = () => {
      setIsLoading(true);
      const products = await fetchSales(momentFrom, momentTo);
      const filteredBySex = filterBySex(products, sex);
-     setDataSource(updateSalesData(productNames, filteredBySex));
+     setDataSource(updateSalesData(productNames, filteredBySex,sex));
      setIsLoading(false);
    };
     useEffect(() => {
@@ -82,8 +82,8 @@ function findFolderByProductName(dataSource,name){
         return productFolder.name === productNamesToFolders[name];
       });
 }
-function updateSalesData(productNames,products){
-  const dataSource = createDefaultDataSource(goods, 0);
+function updateSalesData(productNames,products,sex){
+  const dataSource = createDefaultDataSource(sex, 0);
 
   productNames.forEach((name) => {
     filterByProductName(products, name).forEach((product) => {

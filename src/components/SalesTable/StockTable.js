@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {useParams} from 'react-router-dom'
 import { Table} from 'antd';
-import {goods} from '../../data'
+import {boysGoods, girlsGoods, } from '../../data'
 import { createDefaultDataSource } from '../../utils/utils'
 import {columns,getSize} from '../../utils/utils'
 import { fetchStock } from '../../core/api';
@@ -9,7 +9,8 @@ import { Checkbox } from 'antd';
 import { Menu, Dropdown, Button } from 'antd';
 
 
-function createDefaultStock(products){
+function createDefaultStock(sex){
+  const products = sex === "girls" ? girlsGoods : boysGoods
   return products.map((product)=>{
     return    {
       name: product,
@@ -75,18 +76,15 @@ export const StockTable = ({fetchFunc}) => {
   </Menu>
 );
 
-
   const updateDataSource = async () => {
-    const stockData = createDefaultStock(goods);
-    const newDataSource = createDefaultDataSource(goods);
+    const stockData = createDefaultStock(sex);
+    const newDataSource = createDefaultDataSource(sex);
     setIsLoading(true);
     const options = { folderName: sex, inTransit };
     let products = await fetchStock(options);
 
     if (brand !== "all") {
-      products = products.filter((product) => {
-        return product.name.indexOf(brand) !== -1;
-      });
+      products = filterByBrand(products,brand)
     }
 
     products.forEach((good) => {
@@ -132,4 +130,9 @@ export const StockTable = ({fetchFunc}) => {
   );
 }
 
+const filterByBrand = (products, brand) => {
+ return products.filter((product) => {
+    return product.name.indexOf(brand) !== -1;
+  });
+}
 

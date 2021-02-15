@@ -1,12 +1,14 @@
-import { sizes } from "../data"
+import { boysGoods, girlsGoods, sizes } from "../data"
 
 export function getSize(name){
   const re = /([0-9]+)-([0-9]+)|NB/g;
   return name.match(re)[0];
 }
 
-export function createDefaultDataSource(goods,inisialValue=""){
+export function createDefaultDataSource(sex,inisialValue=""){
+  const goods = sex === 'girls' ? girlsGoods : boysGoods
   return goods.map((good,idx)=>{
+  
     return {
       key: idx,
       name:good,
@@ -29,6 +31,7 @@ export function createDefaultDataSource(goods,inisialValue=""){
 
 export function createColumns(titles){
     const res = titles.map((title,idx)=>{
+    
       return {
         title: title,
         dataIndex: title,

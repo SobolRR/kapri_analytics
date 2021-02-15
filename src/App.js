@@ -22,7 +22,7 @@ class App extends React.Component {
     const { current } = this.state;
     return (
       <>
-        <Route path="/">
+        
           <Menu
             onClick={this.handleClick}
             selectedKeys={[current]}
@@ -55,7 +55,7 @@ class App extends React.Component {
               </Menu.Item>
             </SubMenu>
           </Menu>
-        </Route>
+        
         <Route exact path="/stock/:sex" render={() => <StockTable />} />
         <Route path="/sales/:sex" render={() => <SalesTable />} />
       </>
