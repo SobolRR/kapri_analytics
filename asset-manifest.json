@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/kapri_analytics/static/css/main.b846199f.chunk.css",
-    "main.js": "/kapri_analytics/static/js/main.28649cac.chunk.js",
-    "main.js.map": "/kapri_analytics/static/js/main.28649cac.chunk.js.map",
+    "main.js": "/kapri_analytics/static/js/main.f8bd74e9.chunk.js",
+    "main.js.map": "/kapri_analytics/static/js/main.f8bd74e9.chunk.js.map",
     "runtime-main.js": "/kapri_analytics/static/js/runtime-main.b0ec7d29.js",
     "runtime-main.js.map": "/kapri_analytics/static/js/runtime-main.b0ec7d29.js.map",
     "static/css/2.b72b1a0e.chunk.css": "/kapri_analytics/static/css/2.b72b1a0e.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.b72b1a0e.chunk.css",
     "static/js/2.79e52633.chunk.js",
     "static/css/main.b846199f.chunk.css",
-    "static/js/main.28649cac.chunk.js"
+    "static/js/main.f8bd74e9.chunk.js"
   ]
 }
