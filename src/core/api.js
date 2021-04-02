@@ -1,6 +1,5 @@
 import axios from "axios"
-import moment from 'moment';
-import { dateFormat } from "../data";
+
 
 
 const folderLinks = {
@@ -23,11 +22,12 @@ export const fetchStock = async (options) => {
 
 export const fetchSales = async (
   counterparty,
-  momentFrom = "2020-11-01 00:00:00",
-  momentTo = moment(new Date()).format(dateFormat),
+  momentFrom,
+  momentTo
 ) => {
-  const counterpartyFilter = !!counterparty ?`&filter=counterparty=${counterparty}` : ""
-  const link = `https://online.moysklad.ru/api/remap/1.2/report/profit/byvariant?momentFrom=${momentFrom}&momentTo=${momentTo}` + counterpartyFilter
+
+  const counterpartyFilter = !!counterparty && counterparty !== "All" ?`&filter=counterparty=${counterparty}` : ""
+  const link = `https://online.moysklad.ru/api/remap/1.2/report/profit/byvariant?momentFrom=${momentFrom} 00:00:00&momentTo=${momentTo} 23:59:59` + counterpartyFilter
 
   const result = await instance.post(
     '/',{link},
